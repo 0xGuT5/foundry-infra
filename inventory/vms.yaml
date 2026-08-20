@@ -6,7 +6,7 @@ vms:
   - name: demo-01
     owner: phd-01
     purpose: "Placeholder entry to validate CI"
-    cores: 2
+    cores:2
     memory_mb: 4096
     disk_gb: 40
     vlan: 20
