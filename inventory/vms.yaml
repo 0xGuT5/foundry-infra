@@ -1,0 +1,13 @@
+---
+# Declarative inventory of every VM on the platform.
+# One entry per machine. Adding an entry provisions it; removing one destroys it.
+# Placeholder for now
+vms:
+  - name: demo-01
+    owner: phd-01
+    purpose: "Placeholder entry to validate CI"
+    cores: 2
+    memory_mb: 4096
+    disk_gb: 40
+    vlan: 20
+    expires: "2026-12-31"
