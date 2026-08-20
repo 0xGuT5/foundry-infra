@@ -1,0 +1,64 @@
+---
+name: VM request
+description: Request a virtual machine on the platform
+title: "[VM] "
+labels: ["vm-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tell us what you need. Addressing, VM ID and node placement
+        are assigned automatically, you don't need to pick them.
+
+  - type: input
+    id: owner
+    attributes:
+      label: Your handle
+      description: Your platform handle, e.g. phd-03. If you don't have one yet,
+        leave this blank and one will be assigned.
+      placeholder: phd-03
+    validations:
+      required: true
+
+  - type: input
+    id: purpose
+    attributes:
+      label: What is it for?
+      placeholder: OAI core network testing for the Horizon demo
+    validations:
+      required: true
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      options:
+        - "small — 2 vCPU / 4 GB / 40 GB"
+        - "medium — 4 vCPU / 8 GB / 60 GB"
+        - "large — 8 vCPU / 16 GB / 120 GB"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: vlan
+    attributes:
+      label: Network
+      options:
+        - "sboai-vlan"
+        - "netsoft-vlan"
+    validations:
+      required: true
+
+  - type: input
+    id: expires
+    attributes:
+      label: Delete after (YYYY-MM-DD)
+      description: Extendable later.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Special requirements, ports that need opening, etc.
