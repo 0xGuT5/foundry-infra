@@ -2,7 +2,7 @@
 
 Self-service infrastructure and services for a bare-metal research testbed.
 
-Basically removing the bottle neck .. wchich was me .. let it be only a PR validation then xd. 
+Basically removing the bottleneck... which was me. Let it be a PR validation instead.
 
 ## Architecture
 
