@@ -3,7 +3,7 @@ provider "proxmox" {}
 resource "proxmox_virtual_environment_vm" "demo" {
   name      = "demo-01"
   node_name = var.target_node
-  vm_id     = 200
+  vm_id     = 9200
 
   description = "First VM provisioned by Terraform. Managed in foundry-infra."
   tags        = ["terraform", "foundry-infra"]
@@ -38,7 +38,7 @@ resource "proxmox_virtual_environment_vm" "demo" {
 
     ip_config {
       ipv4 {
-        address = "172.21.18.95/24"
+        address = "172.21.18.95/22"
         gateway = "172.21.19.254"
       }
     }
