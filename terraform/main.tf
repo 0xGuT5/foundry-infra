@@ -45,7 +45,7 @@ resource "proxmox_virtual_environment_vm" "demo" {
 
     user_account {
       username = "ubuntu"
-      keys     = [trimspace(file("~/.ssh/id_ed25519.pub"))]
+      keys     = var.ssh_public_keys
     }
   }
 

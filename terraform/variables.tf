@@ -8,3 +8,8 @@ variable "datastore_id" {
   type        = string
   default     = "local-lvm"
 }
+
+variable "ssh_public_keys" {
+  description = "SSH public keys to inject into provisioned VMs"
+  type        = list(string)
+}
