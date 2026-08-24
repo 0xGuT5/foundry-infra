@@ -1,35 +1,54 @@
 provider "proxmox" {}
 
-resource "proxmox_virtual_environment_vm" "demo" {
-  name      = "demo-01"
-  node_name = var.target_node
-  vm_id     = 9200
+locals {
+  vlans = yamldecode(file("${path.module}/../inventory/vlans.yaml")).vlans
+  nodes = {
+    for n in yamldecode(file("${path.module}/../inventory/nodes.yaml")).nodes :
+    n.name => n
+  }
 
-  description = "First VM provisioned by Terraform. Managed in foundry-infra."
-  tags        = ["terraform", "foundry-infra"]
+  # Resolve each VM's bridge and gateway from its node and VLAN.
+  vms = {
+    for vm in yamldecode(file("${path.module}/../inventory/vms.yaml")).vms :
+    vm.name => merge(vm, {
+      bridge  = local.nodes[vm.node].vlans[vm.vlan]
+      gateway = local.vlans[vm.vlan].gateway
+    })
+  }
+}
+
+resource "proxmox_virtual_environment_vm" "vm" {
+  for_each = local.vms
+
+  name      = each.value.name
+  node_name = each.value.node
+  vm_id     = each.value.vm_id
+
+  description = "Owner: ${each.value.owner}. ${each.value.purpose}"
+  tags        = ["terraform", "foundry-infra", each.value.vlan]
 
   clone {
-    vm_id = 9000
+    vm_id = var.template_vm_id
     full  = true
   }
 
   cpu {
-    cores = 2
+    cores = each.value.cores
     type  = "host"
   }
 
   memory {
-    dedicated = 4096
+    dedicated = each.value.memory_mb
   }
 
   disk {
     datastore_id = var.datastore_id
     interface    = "scsi0"
-    size         = 40
+    size         = each.value.disk_gb
   }
 
   network_device {
-    bridge   = "vmbr0"
+    bridge   = each.value.bridge
     firewall = true
   }
 
@@ -38,8 +57,8 @@ resource "proxmox_virtual_environment_vm" "demo" {
 
     ip_config {
       ipv4 {
-        address = "172.21.18.95/22"
-        gateway = "172.21.19.254"
+        address = each.value.ipv4
+        gateway = each.value.gateway
       }
     }
 

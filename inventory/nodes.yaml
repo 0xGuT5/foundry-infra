@@ -1,0 +1,39 @@
+---
+# Which node can reach which VLAN, and over which bridge.
+#
+# A node appears under a VLAN only if it is physically cabled to it.
+# Adding a node to a VLAN here makes it eligible for placement
+
+nodes:
+  - name: guava
+    vlans:
+      sboai: vmbr424
+      netsoft: vmbr427
+
+  - name: framboise
+    vlans:
+      sboai: vmbr0
+
+  - name: eiffel
+    vlans:
+      sboai: vmbr0
+
+  - name: magenta
+    vlans:
+      sboai: vmbr0
+
+  - name: bougainvillier
+    vlans:
+      sboai: vmbr0
+
+  - name: cherry
+    vlans:
+      sboai: vmbr0
+
+  - name: blida
+    vlans:
+      sboai: vmbr0
+
+  - name: jasmin
+    vlans:
+      sboai: vmbr0
