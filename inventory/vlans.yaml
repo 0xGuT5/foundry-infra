@@ -1,0 +1,14 @@
+---
+# Networks available to provisioned VMs.
+# Ranges are assigned by EURECOM IT. Do not invent entries here.
+
+vlans:
+  sboai:
+    description: "SBOAI VLAN"
+    subnet: 172.21.16.0/22
+    gateway: 172.21.19.254
+
+  netsoft:
+    description: "NetSoft VLAN"
+    subnet: 172.21.24.0/22
+    gateway: 172.21.27.254

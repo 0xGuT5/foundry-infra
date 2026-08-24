@@ -1,11 +1,11 @@
-output "vm_id" {
-  value = proxmox_virtual_environment_vm.demo.vm_id
-}
-
-output "vm_name" {
-  value = proxmox_virtual_environment_vm.demo.name
-}
-
-output "vm_ipv4" {
-  value = proxmox_virtual_environment_vm.demo.ipv4_addresses
+output "vms" {
+  description = "Provisioned VMs and their addresses"
+  value = {
+    for name, vm in proxmox_virtual_environment_vm.vm :
+    name => {
+      vm_id = vm.vm_id
+      node  = vm.node_name
+      ipv4  = vm.ipv4_addresses
+    }
+  }
 }
