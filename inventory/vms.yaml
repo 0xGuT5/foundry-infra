@@ -21,7 +21,7 @@ vms:
     owner: phd-02
     purpose: "Testing placement validation"
     vlan: netsoft
-    node: framboise
+    node: guava
     vm_id: 9201
     cores: 2
     memory_mb: 4096
