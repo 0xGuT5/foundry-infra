@@ -3,9 +3,8 @@
 # Adding an entry provisions it; removing one destroys it.
 #
 # vlan: chosen by requester
-# node: chosen by platform for now. 
-# ipv4: allocated by hand from the sheet for now.  
-
+# node: chosen by platform for now.
+# ipv4: allocated by hand from the sheet for now.
 vms:
   - name: demo-01
     owner: phd-01
