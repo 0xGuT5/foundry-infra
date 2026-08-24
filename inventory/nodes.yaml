@@ -6,11 +6,13 @@
 
 nodes:
   - name: guava
+    template_vm_id: 9001
     vlans:
       sboai: vmbr424
       netsoft: vmbr427
 
   - name: framboise
+    template_vm_id: 9000
     vlans:
       sboai: vmbr0
 

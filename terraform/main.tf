@@ -11,8 +11,9 @@ locals {
   vms = {
     for vm in yamldecode(file("${path.module}/../inventory/vms.yaml")).vms :
     vm.name => merge(vm, {
-      bridge  = local.nodes[vm.node].vlans[vm.vlan]
-      gateway = local.vlans[vm.vlan].gateway
+      bridge      = local.nodes[vm.node].vlans[vm.vlan]
+      gateway     = local.vlans[vm.vlan].gateway
+      template_id = local.nodes[vm.node].template_vm_id
     })
   }
 }
@@ -28,7 +29,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
   tags        = ["terraform", "foundry-infra", each.value.vlan]
 
   clone {
-    vm_id = var.template_vm_id
+    vm_id = each.value.template_id
     full  = true
   }
 
