@@ -73,16 +73,25 @@ def main():
             )
             continue
 
-        # --- node exists and reaches that vlan ---
+
+        # --- node exists, reaches that vlan, and has a template ---
         if vm["node"] not in nodes:
             errors.append(f"{label}: unknown node '{vm['node']}'")
-        elif vm["vlan"] not in nodes[vm["node"]]["vlans"]:
-            errors.append(
-                f"{label}: node '{vm['node']}' has no port on vlan "
-                f"'{vm['vlan']}'"
-            )
-            suggest_node(vm["vlan"], nodes, load_by_node, label)
+        else:
+            node = nodes[vm["node"]]
 
+            if vm["vlan"] not in node["vlans"]:
+                errors.append(
+                    f"{label}: node '{vm['node']}' has no port on vlan "
+                    f"'{vm['vlan']}'"
+                )
+                suggest_node(vm["vlan"], nodes, load_by_node, label)
+
+            if not node.get("template_vm_id"):
+                errors.append(
+                    f"{label}: node '{vm['node']}' has no cloud-init template. "
+                    f"Build one there and record its VMID in nodes.yaml."
+                )
         # --- ip valid, unique, inside the vlan subnet ---
         try:
             iface = ipaddress.ip_interface(vm["ipv4"])
@@ -127,9 +136,15 @@ def main():
 
 def suggest_node(vlan, nodes, load_by_node, label):
     """Tell the operator which nodes can actually serve this VLAN."""
-    eligible = [n for n, cfg in nodes.items() if vlan in cfg["vlans"]]
+
+    eligible = [
+        n for n, cfg in nodes.items()
+        if vlan in cfg["vlans"] and cfg.get("template_vm_id")
+    		]
     if not eligible:
-        hints.append(f"{label}: no node is cabled to '{vlan}'")
+        hints.append(
+            f"{label}: no node both reaches '{vlan}' and has a template"
+        )
         return
     ranked = sorted(eligible, key=lambda n: (load_by_node[n], n))
     listing = ", ".join(f"{n} ({load_by_node[n]} VMs)" for n in ranked)
