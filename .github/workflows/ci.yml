@@ -39,3 +39,20 @@ jobs:
       - name: Validate
         run: terraform validate
         working-directory: terraform
+  validate-inventory:
+    name: Validate inventory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Validate inventory
+        run: python scripts/validate_inventory.py
