@@ -17,3 +17,14 @@ vms:
     disk_gb: 40
     ipv4: 172.21.18.95/22
     expires: "2026-12-31"
+  - name: demo-02
+    owner: phd-02
+    purpose: "Testing placement validation"
+    vlan: netsoft
+    node: framboise
+    vm_id: 9201
+    cores: 2
+    memory_mb: 4096
+    disk_gb: 40
+    ipv4: 172.21.24.50/22
+    expires: "2026-12-31"
