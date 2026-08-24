@@ -11,8 +11,8 @@ locals {
   vms = {
     for vm in yamldecode(file("${path.module}/../inventory/vms.yaml")).vms :
     vm.name => merge(vm, {
-      bridge  = local.nodes[vm.node].vlans[vm.vlan]
-      gateway = local.vlans[vm.vlan].gateway
+      bridge      = local.nodes[vm.node].vlans[vm.vlan]
+      gateway     = local.vlans[vm.vlan].gateway
       template_id = local.nodes[vm.node].template_vm_id
     })
   }
