@@ -17,3 +17,29 @@ imported:
     os_type: l26
     started: false
     adopted: "2026-08-25"
+  - name: vm11
+    hostname: vm11.netsoft.cs.eurecom.fr
+    owner: radhi
+    node: blida
+    vlan: netsoft
+    vm_id: 141
+    cores: 4
+    sockets: 1
+    memory_mb: 8192
+    disk_gb: 32
+    os_type: l26
+    started: true
+    adopted: "2026-08-25"
+  - name: vm17
+    hostname: vm17.netsoft.cs.eurecom.fr
+    owner: ayoub
+    node: jasmin
+    vlan: netsoft
+    vm_id: 144
+    cores: 1
+    sockets: 4
+    memory_mb: 32768
+    disk_gb: 64
+    os_type: l26
+    started: true
+    adopted: "2026-08-25"
