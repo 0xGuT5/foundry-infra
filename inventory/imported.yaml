@@ -1,0 +1,17 @@
+---
+# VMs that existed before found-infra and were adopted with `terraform import`.
+# Terraform tracks them but did not create them: no template, no cloud-init.
+# prevent_destroy is set on this resource.
+
+imported:
+  - name: 5gfacility39
+    hostname: 5gfacility39.sboai.cs.eurecom.fr
+    owner: unknown
+    node: magenta
+    vlan: sboai
+    vm_id: 103
+    cores: 4
+    sockets: 1
+    memory_mb: 8192
+    disk_gb: 32
+    adopted: "2026-08-25"

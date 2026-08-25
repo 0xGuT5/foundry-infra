@@ -16,6 +16,10 @@ locals {
       template_id = local.nodes[vm.node].template_vm_id
     })
   }
+  imported = {
+    for vm in yamldecode(file("${path.module}/../inventory/imported.yaml")).imported :
+    vm.name => vm
+  }
 }
 
 resource "proxmox_virtual_environment_vm" "vm" {
@@ -71,5 +75,42 @@ resource "proxmox_virtual_environment_vm" "vm" {
 
   agent {
     enabled = true
+  }
+}
+
+resource "proxmox_virtual_environment_vm" "imported" {
+  for_each = local.imported
+
+  name      = each.value.hostname
+  node_name = each.value.node
+  vm_id     = each.value.vm_id
+
+  on_boot       = false
+  scsi_hardware = "virtio-scsi-single"
+
+  cpu {
+    cores   = each.value.cores
+    sockets = each.value.sockets
+    type    = "host"
+  }
+
+  memory {
+    dedicated = each.value.memory_mb
+  }
+
+  disk {
+    datastore_id = var.datastore_id
+    interface    = "scsi0"
+    size         = each.value.disk_gb
+    iothread     = true
+  }
+
+  network_device {
+    bridge   = local.nodes[each.value.node].vlans[each.value.vlan]
+    firewall = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
