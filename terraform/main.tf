@@ -86,6 +86,7 @@ resource "proxmox_virtual_environment_vm" "imported" {
   vm_id     = each.value.vm_id
 
   on_boot       = false
+  started       = each.value.started
   scsi_hardware = "virtio-scsi-single"
 
   cpu {
@@ -108,6 +109,9 @@ resource "proxmox_virtual_environment_vm" "imported" {
   network_device {
     bridge   = local.nodes[each.value.node].vlans[each.value.vlan]
     firewall = true
+  }
+  operating_system {
+    type = each.value.os_type
   }
 
   lifecycle {

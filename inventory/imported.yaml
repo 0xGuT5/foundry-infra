@@ -6,7 +6,7 @@
 imported:
   - name: 5gfacility39
     hostname: 5gfacility39.sboai.cs.eurecom.fr
-    owner: unknown
+    owner: rehama, sofian
     node: magenta
     vlan: sboai
     vm_id: 103
@@ -14,4 +14,6 @@ imported:
     sockets: 1
     memory_mb: 8192
     disk_gb: 32
+    os_type: l26
+    started: false
     adopted: "2026-08-25"
