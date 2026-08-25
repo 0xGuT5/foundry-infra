@@ -12,6 +12,9 @@ Placement is decided once, at creation. Terraform never recomputes it (changing 
 
 To add a node to a VLAN change to nodes.yaml. It Takes effect for the next VM placement. 
 
+## VM Image 
+Image customisation must happen on the management VM, not on a hypervisor. Installing libguestfs-tools pulls fuse3, which conflicts with fuse, which pve-cluster depends on.
+The template image is built on the management VM with `virt-customize`, then copied to the proxmox node before `qm create`. Packages are pre-downloaded and installed offline via `--copy-in`, since the libguestfs appliance has no working network inside a nested VM.
 
 ## Architecture
 
