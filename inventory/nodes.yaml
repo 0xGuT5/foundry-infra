@@ -34,8 +34,8 @@ nodes:
 
   - name: blida
     vlans:
-      sboai: vmbr0
+      netsoft: vmbr0
 
   - name: jasmin
     vlans:
-      sboai: vmbr0
+      netsoft: vmbr0
