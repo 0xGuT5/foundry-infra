@@ -33,6 +33,7 @@ nodes:
       sboai: vmbr0
 
   - name: blida
+    template_vm_id: 9002
     vlans:
       netsoft: vmbr0
 
