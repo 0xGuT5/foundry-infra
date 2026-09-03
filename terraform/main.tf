@@ -116,5 +116,6 @@ resource "proxmox_virtual_environment_vm" "imported" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes  = [disk, memory, cpu]
   }
 }
