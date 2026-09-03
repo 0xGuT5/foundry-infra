@@ -26,7 +26,7 @@ imported:
     cores: 4
     sockets: 1
     memory_mb: 8192
-    disk_gb: 32
+    disk_gb: 82
     os_type: l26
     started: true
     adopted: "2026-08-25"
