@@ -17,3 +17,14 @@ vms:
     disk_gb: 40
     ipv4: 172.21.18.95/22
     expires: "2026-12-31"
+  - name: vm19.netsoft.cs.eurecom.fr
+    owner: adlen
+    purpose: "Adlen, k8s"
+    vlan: netsoft
+    node: blida
+    vm_id: 9201
+    cores: 2
+    memory_mb: 4096
+    disk_gb: 64
+    ipv4: 172.21.25.19/22
+    expires: "2026-12-31"
